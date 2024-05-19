@@ -33,3 +33,15 @@ jobs:
       
       - name: Push image to docker hub
         run: docker push ${{ secrets.DOCKER_USERNAME }}/ci-cd-test
+
+  deploys:
+    needs: build
+    runs-on: self-hosted
+    steps:
+     - name: Docker pull
+       run: docker pull ${{ secrets.DOCKER_USERNAME }}/ci-cd-test
+     - name: Delete old container
+       run: docker rm -f ci-cd-test
+     - name: Run docker container
+       run: docker run -d -p 8090:8090 --name ci-cd-test ${{ secrets.DOCKER_USERNAME }}/ci-cd-test
+      
