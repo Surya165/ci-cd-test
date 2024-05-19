@@ -32,4 +32,4 @@ jobs:
         run: docker build -t ci-cd-test-vinay-surya .
       
       - name: Push image to docker hub
-        run: docker push ${{ secrets.DOCKER_USERNAME }}/ci-cd-test-vinay-surya:latest
+        run: docker push ${{ secrets.DOCKER_USERNAME }}/ci-cd-test
